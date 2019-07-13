@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 public class VerseRepository {
 
-    private final Set<Verse> verses;
+    private final Set<Verse> verses = new HashSet<>();
 
-    public VerseRepository(Set<Verse> verses) {
-        this.verses = Collections.unmodifiableSet(verses);
+    public void save(Verse verse) {
+        verses.add(verse);
     }
 
     public Set<Verse> search(String query) {
