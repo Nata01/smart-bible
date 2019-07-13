@@ -9,7 +9,7 @@ public class VerseMapper {
         for (int i = 0; i < script.getChapters().size(); i++) {
             List<String> chapter = script.getChapters().get(i);
             for (int j = 0; j < chapter.size(); j++) {
-                String verse = chapter.get(0);
+                String verse = chapter.get(j);
                 Verse verseObject = new Verse();
                 verseObject.setText(verse);
                 verseObject.setAddress(new Address(script.getName(), i + 1, j + 1));
