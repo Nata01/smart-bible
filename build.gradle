@@ -17,6 +17,7 @@ dependencies {
     compile group: 'io.ratpack', name: 'ratpack-core', version: '1.6.1'
     compile group: 'io.ratpack', name: 'ratpack-test', version: '1.6.1'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'io.ratpack', name: 'ratpack-jackson', version: '1.6.1'
 
 
     compile group: 'junit', name: 'junit', version: '4.11'

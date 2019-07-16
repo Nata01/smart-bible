@@ -6,10 +6,13 @@ import ratpack.http.Status;
 import ratpack.server.RatpackServer;
 import ratpack.server.ServerConfig;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static ratpack.jackson.Jackson.json;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -24,7 +27,10 @@ public class Main {
         RatpackServer.start(server -> server
                 .serverConfig(ServerConfig.builder().development(true).port(8080))
                 .handlers(chain -> chain
-                        .get("projector", new ProjectorHandler(projectorData))
+                        .prefix("api", apiChain -> apiChain
+                                .get("projector", new ProjectorHandler(projectorData))
+                        )
+                        .get("projector", ctx -> ctx.getResponse().sendFile(Paths.get(Main.class.getClassLoader().getResource("public/projector.html").toURI())))
                         .path("admin", ctx -> {
                             if (ctx.getRequest().getMethod().isGet()) {
                                 ctx.getResponse()
@@ -48,7 +54,7 @@ public class Main {
                                 });
                             }
                         })
-                        .get(":name", ctx -> ctx.render("Hello " + ctx.getPathTokens().get("name") + "!"))
+                        .get(":name", ctx -> ctx.render(json("Hello " + ctx.getPathTokens().get("name") + "!")))
                 )
         );
     }

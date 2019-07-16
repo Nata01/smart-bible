@@ -3,6 +3,8 @@ package com.github.smartbible.verse;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
+import static ratpack.jackson.Jackson.json;
+
 public class ProjectorHandler implements Handler {
 
     private ProjectorData projectorData;
@@ -13,6 +15,6 @@ public class ProjectorHandler implements Handler {
 
     @Override
     public void handle(Context ctx) {
-        ctx.render(projectorData.getText());
+        ctx.render(json(projectorData));
     }
 }
